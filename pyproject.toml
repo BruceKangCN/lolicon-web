@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "lolicon-web"
+version = "0.1.0"
+description = ""
+authors = ["Bruce Kang <brucekangcn@gmail.com>"]
+readme = "README.md"
+packages = [{include = "lolicon_web"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiohttp = "^3.8.1"
+typing-extensions = "^4.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

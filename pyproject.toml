@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lolicon-web"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Bruce Kang <brucekangcn@gmail.com>"]
 readme = "README.md"
@@ -10,6 +10,7 @@ packages = [{include = "lolicon_web"}]
 python = "^3.10"
 aiohttp = "^3.8.1"
 typing-extensions = "^4.3.0"
+toml = "^0.10.2"
 
 
 [build-system]

@@ -1,51 +1,48 @@
 #!/bin/env python3
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import dataclasses
+from pathlib import Path
 from typing import Optional, Sequence
 from typing_extensions import Self
 from aiohttp import web
 import aiohttp
+import toml
 
 
 @dataclass
 class ApiConfig:
-    r18: int
-    num: int
-    size: Sequence[str]
-    proxy: str
-    uid: Optional[int]
-    tags: Optional[Sequence[str]]
-    dateAfter: Optional[int]
-    dateBefore: Optional[int]
+    r18: int = 1
+    num: int = 1
+    size: Sequence[str] = field(default_factory=lambda: ["original"])
+    proxy: str = "i.pixiv.re"
+    uid: Optional[int] = None
+    tags: Optional[Sequence[str]] = None
+    dateAfter: Optional[int] = None
+    dateBefore: Optional[int] = None
 
-    @classmethod
-    def default(cls) -> Self:
-        return ApiConfig(
-            r18=1,
-            num=1,
-            size=["original"],
-            proxy="i.pixiv.re",
-            uid=None,
-            tags=None,
-            dateAfter=None,
-            dateBefore=None,
-        )
+    def update(self, new: dict) -> Self:
+        for k, v in new.items():
+            if hasattr(self, k):
+                setattr(self, k, v)
+        return self
 
 
 @dataclass
 class Config:
-    api_url: str
-    size: str
-    params: ApiConfig
+    api_url: str = "https://api.lolicon.app/setu/v2"
+    size: str = "original"
+    params: ApiConfig = ApiConfig()
 
-    @classmethod
-    def default(cls) -> Self:
-        return Config(
-            api_url="https://api.lolicon.app/setu/v2",
-            size="original",
-            params=ApiConfig.default(),
-        )
+    def update(self, new: dict) -> Self:
+        for k, v in new.items():
+            if k == "api_url":
+                self.api_url = v
+            elif k == "size":
+                self.size = v
+            elif k == "params":
+                self.params.update(v)
+        return self
 
 
 async def get_setu(req: web.Request) -> web.Response:
@@ -67,5 +64,10 @@ if __name__ == "__main__":
     app.add_routes([
         web.get("/setu", get_setu),
     ])
-    app["config"] = Config.default()
+    app["config"] = Config()
+
+    p = Path("/etc") / "lolicon" / "config.toml"
+    if p.exists():
+        app["config"].update(toml.load(p))
+
     web.run_app(app)

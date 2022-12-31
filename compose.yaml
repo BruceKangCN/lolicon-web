@@ -1,0 +1,7 @@
+services:
+  app:
+    image: lolisaiko/lolicon
+    ports:
+      - 8080:8080
+    volumes:
+      - $PWD/config:/etc/lolicon

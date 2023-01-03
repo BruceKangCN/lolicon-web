@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lolicon-web"
-version = "0.4.0"
+version = "0.4.1"
 description = ""
 authors = ["Bruce Kang <brucekangcn@gmail.com>"]
 readme = "README.md"

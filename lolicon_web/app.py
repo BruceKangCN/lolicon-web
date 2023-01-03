@@ -7,7 +7,7 @@ from typing_extensions import Self
 from aiohttp import web
 import toml
 
-from lolicon_web.route import routes
+from route import routes
 
 
 @dataclass

@@ -7,6 +7,6 @@ num = 1
 size = ["original"]
 proxy = "i.pixiv.re"
 # uid = 123456
-# tags = ["loli"]
+# tag = ["loli"]
 # dateAfter = 0
 # dateBefore = 0

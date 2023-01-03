@@ -17,7 +17,7 @@ class ApiConfig:
     size: Sequence[str] = field(default_factory=lambda: ["original"])
     proxy: str = "i.pixiv.re"
     uid: Optional[int] = None
-    tags: Optional[Sequence[str]] = None
+    tag: Optional[Sequence[str]] = None
     dateAfter: Optional[int] = None
     dateBefore: Optional[int] = None
 

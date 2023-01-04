@@ -16,6 +16,6 @@ the following fields in `params` section are supported and can be used to set PO
 - `size`
 - `proxy`
 - `uid`
-- `tags`
+- `tag`
 - `dateAfter`
 - `dateBefore`
